@@ -31,25 +31,42 @@ with tf.Session() as sess:
     print(str(result,'utf-8'))
 
 # 打印数字
-num = tf.constant(1.01,dtype=tf.float32)
+num_int = tf.constant(100,dtype=tf.int32)
+num_float = tf.constant(1.01,dtype=tf.float32)
 with tf.Session() as sess:
-    result = sess.run(num)
+    result = sess.run(num_int)
     print(result)
+
+    result = sess.run(num_float)
+    print(result)
+
 
 # 打印变量
 val1 = tf.Variable(0.,dtype=tf.float32)
+#变量需要初始化
 init = tf.initialize_all_variables()
 with tf.Session() as sess:
+    #必须先执行变量初始化，不然报错
     sess.run(init)
     result = sess.run(val1)
     print("打印变量原始结果")
     print(result)
     for i in range(5):
+        #给变量赋值
         update1 = tf.assign(val1, i+1)
+        #需要执行一下更新才能真正实现赋值
         sess.run(update1)
+        #获取更新后变量的值
         result = sess.run(val1)
         print("更新变量值%s" % str(i+1))
         print(result)
 
 
+x = tf.placeholder(dtype=tf.int32)
+y = tf.placeholder(dtype=tf.int32)
+add = tf.add(x,y)
+with tf.Session() as sess:
+    result = sess.run(add,feed_dict={"x":12,"y":12})
+    print("打印占位符结果")
+    print(result)
 
