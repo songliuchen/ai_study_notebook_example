@@ -1,4 +1,7 @@
-# ai_study_notebook_example
-1、人工智能学习相关资料整理 
-2、人工智能学习相关示例代码整理，包括tensorflow1.x、tensorflow2.x、pytorch实现 
-3、业务模块的技术方案梳理
+### AI学习入门资料整理（边学习边整理）
+#### 人工智能学习相关资料整理 
+#### 人工智能学习相关示例代码整理，包括tensorflow1.x、tensorflow2.x、pytorch实现
+- 通过python3.x版本实现
+- 只涉及机器学习、深度学习相关代码，非python入门示例代码
+
+#### 业务模块的技术方案梳理
