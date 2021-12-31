@@ -1,6 +1,7 @@
 '''
 1、tensorflow 常量、变量、占位符使用
-2、tensorflow 加、减、乘、除数学运算
+2、tensorflow 加、减、乘、除、转置数学运算
+3、tensorflow multiply 与matmul 区别
 '''
 
 # 引入tensorflow，一般给个简称
@@ -22,14 +23,15 @@ sess = tf.Session()
 print("写法1——在会话中打印结果")
 result = sess.run(text)
 #不加str貌似答应的byte类型
-print(str(result,'utf-8'))
+print(result.decode())
+tf.print(text)
 sess.close()
 
 # 会话创建方式2，with创建，自动关闭（默认采用第二种方式）
 with tf.Session() as sess:
     print("写法2——在会话中打印结果")
     result = sess.run(text)
-    print(str(result,'utf-8'))
+    print(result.decode())
 
 # 打印数字
 num_int = tf.constant(100,dtype=tf.int32)
@@ -117,7 +119,7 @@ con_arr_int4 = tf.constant([[3,3,3],[4,4,4]])
 #矩阵加减乘除
 add_arr = tf.add(con_arr_int1,con_arr_int2)
 sub_arr = tf.subtract(con_arr_int1,con_arr_int2)
-mul_arr = tf.multiply(con_arr_int1,con_arr_int2)
+mul_arr = tf.matmul(con_arr_int1,con_arr_int2)
 div_arr = tf.divide(con_arr_int1,con_arr_int2)
 
 # 单数*矩阵、矩阵/单数
@@ -130,9 +132,27 @@ arr_mul_arr = tf.matmul(con_arr_int3,con_arr_int4)
 #矩阵转置
 arr_trans = tf.transpose(con_arr_int1)
 
+
+#变量与矩阵运算
+var_arr1 = tf.Variable([[2,2],[3,3]],dtype=tf.int32)
+col_arr1 = tf.constant([[2,2],[3,3]])
+arr_mul_var = tf.matmul(var_arr1,col_arr1)
+
+#变量与变量矩阵运算
+var_var_arr1 = tf.Variable([[2,2],[3,3]],dtype=tf.int32)
+var_var_arr2 = tf.constant([[2,2],[3,3]],dtype=tf.int32)
+var_mul_var = tf.matmul(var_var_arr1,var_var_arr2)
+init = tf.initialize_all_variables()
+
+#占位符与矩阵运算
+pla_pla_arr1 = tf.placeholder(shape=[2,2],dtype=tf.int32)
+pla_pla_arr2 = tf.placeholder(shape=[2,2],dtype=tf.int32)
+pla_mul_pla = tf.matmul(var_var_arr1,var_var_arr2)
 with tf.Session() as sess:
+    sess.run(init)
     result = sess.run(add)
-    print("str加法结果：%s" % str(result,"utf-8"))
+    # python3.x str变量默认采用unicode类型，需要调用decode()
+    print("str加法结果：%s" % result.decode())
 
     # int 数学运算
     result = sess.run(add_int)
@@ -179,3 +199,31 @@ with tf.Session() as sess:
     print("矩阵转置效果前：\n%s" % result)
     result = sess.run(arr_trans)
     print("矩阵转置效果后：\n%s" % result)
+
+    # 变量与矩阵运算
+    result = sess.run(arr_mul_var)
+    print("变量*矩阵结果：\n%s" % result)
+    result = sess.run(var_mul_var)
+    print("变量矩阵*变量矩阵：\n%s" % result)
+
+    # 占位符矩阵*占位符矩阵
+    result = sess.run(pla_mul_pla,feed_dict={pla_pla_arr1:[[1,1],[2,2]],pla_pla_arr2:[[3,3],[4,4]]})
+    print("占位符矩阵*占位符矩阵：\n%s" % result)
+
+
+#############################################################################################################
+
+# tf.multiply()与tf.matmul()区别
+# multiply()两个矩阵中对应元素各自相乘，matmul()将矩阵a乘以矩阵b，生成a * b,必须满足矩阵相乘的条件。
+# multiply 支持单数*矩阵，其他要求两个矩阵是同型矩阵
+con_arr_int1 = tf.constant([[1,1],[2,2]])
+con_arr_int2 = tf.constant([[3,3],[4,4]])
+con_arr_multiply = tf.multiply(con_arr_int1,con_arr_int2)
+con_arr_matmul = tf.matmul(con_arr_int1,con_arr_int2)
+with tf.Session() as sess:
+
+    result = sess.run(con_arr_multiply)
+    print("int*arr multiply结果：\n%s" % result)
+
+    result = sess.run(con_arr_matmul)
+    print("int*arr matmul结果：\n%s" % result)
