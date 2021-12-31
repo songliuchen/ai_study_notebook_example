@@ -40,10 +40,22 @@
   - 中文官方网站：https://www.paddlepaddle.org.cn/
   - git地址：https://github.com/PaddlePaddle/Paddle.git
   - gitee地址：https://gitee.com/paddlepaddle/Paddle
-  - Paddle-Lite 轻量版 https://github.com/PaddlePaddle/Paddle-Lite，支持android\ios
   - Paddle-Lite 支持 **<font color = "red">c++、python、java</font>**,基础班支持 **<font color="red">python</font>**
-  - 有自己的开发IDE，VisualDL
+  - Paddle-Lite 轻量版 https://github.com/PaddlePaddle/Paddle-Lite，支持android\ios
+  - paddle.js支持在浏览器端加载模型预测（需要先通过转换将paddle训练好的模型转换成paddle.js支持格式），目前通过WebGL实现
   - 有完善的社区、文档、示例代码、视频等教学资源，并提供众多中文在线基础模型。
+  - 有自己的模型训练及模型效果可视化展示平台：<font color = "red">VisualDL</font>
+  - 支持分布式训练：<font color = "red">FeetAPI</font>
+  - 有在线编码调试，训练平台：<font color = "red">PaddleCloud</font>
+  - 有量子深度学习框架：<font color = "red">paddle-quantum</font>
+  - 支持多任务学习框架（主要针对NLP）<font color = "red">PLAM</font>
+  - 有自己的预训练模型工具 <font color = "red">paddle hub</font>（NLP中的预训练模型文心[ERNIE]）
+  - 有自己的推理库  <font color = "red">paddle inference</font>
+  - 其他配套组件，例如数据清洗、增强、转换组件；模型压缩、转换组件；模型服务部署组件
+  - 通过<font color="red">X2Paddle</font>支持将tensorflow、caffe模型转换为 paddlepaddle模型
+  - paddlepaddle开发流程：
+  ![paddle 工作流程](../../resources/images/paddle_flow.png)
+  
 #####其他（未了解）
  - Theano
  - MXNet
