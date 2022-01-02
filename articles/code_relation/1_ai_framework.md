@@ -40,8 +40,8 @@
   - 中文官方网站：https://www.paddlepaddle.org.cn/
   - git地址：https://github.com/PaddlePaddle/Paddle.git
   - gitee地址：https://gitee.com/paddlepaddle/Paddle
-  - Paddle-Lite 支持 **<font color = "red">c++、python、java</font>**,基础班支持 **<font color="red">python</font>**
-  - Paddle-Lite 轻量版 https://github.com/PaddlePaddle/Paddle-Lite，支持android\ios
+  - Paddle-Lite 支持 **<font color = "red">c++、python、java</font>**；开发支持 **<font color="red">python</font>** PC端部署支持 **<font color ="red">python、c++、java、go、R</font>**
+  - Paddle-Lite 轻量版 https://github.com/PaddlePaddle/Paddle-Lite 支持android\ios
   - paddle.js支持在浏览器端加载模型预测（需要先通过转换将paddle训练好的模型转换成paddle.js支持格式），目前通过WebGL实现
   - 有完善的社区、文档、示例代码、视频等教学资源，并提供众多中文在线基础模型。
   - 有自己的模型训练及模型效果可视化展示平台：<font color = "red">VisualDL</font>

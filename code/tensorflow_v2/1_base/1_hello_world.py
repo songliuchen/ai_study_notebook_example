@@ -44,7 +44,7 @@ print("算数运算：")
 con1 = tf.constant("hello")
 con2 = tf.constant("world")
 add = tf.add(con1,con2)
-print("str加法结果：%s" % add.numpy().decode())
+print("str加法结果：%s" % add.numpy())
 tf.print("str加法结果2：%s" % add)
 
 # #int运算
