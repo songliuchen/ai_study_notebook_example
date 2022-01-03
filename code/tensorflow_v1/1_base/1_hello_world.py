@@ -16,6 +16,7 @@ text = tf.constant("hello word")
 #tensorflow1.0默认使用静态图方式，直接、印d得不到结果
 print("打印原始text对象")
 print(text)
+print("tensorflow版本 %s" % tf.__version__)
 
 #tensorflow1.0默认需要创建会话，才能获取最终结果
 # 会话创建方式1，直接创建，用完关闭
