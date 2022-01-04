@@ -53,7 +53,8 @@
   - 有自己的推理库  <font color = "red">paddle inference</font>
   - 其他配套组件，例如数据清洗、增强、转换组件；模型压缩、转换组件；模型服务部署组件
   - 通过<font color="red">X2Paddle</font>支持将tensorflow、caffe模型转换为 paddlepaddle模型
-  - paddlepaddle开发流程及各套件综合使用流程：
+  - paddlepaddle开发流程及各套件综合使用流程：  
+
   ![paddle 工作流程](../../resources/images/paddle_flow.png)
   
 #####其他（未了解）
