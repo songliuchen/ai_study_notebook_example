@@ -13,3 +13,5 @@ htmlcov
 mnist
 .idea/
 venv/
+sample_data_**.json
+temp/
