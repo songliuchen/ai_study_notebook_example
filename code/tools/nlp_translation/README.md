@@ -7,7 +7,7 @@
     - **selenium 版本4.1.0(低版本存在兼容性问题，需要手工调整部分代码)、chrome 版本96（程序中plugin下的驱动也是采用该版本，其他版本可自行从 https://chromedriver.chromium.org/downloads 需要和本地chrome版本保持一致，无法下载可通过vpn代理）**
     - **google 翻译需要设置本地dns，添加8.8.8.8 dns 解析**
     - 因为通过模拟人工在界面上操作，翻译速度没有直接通过接口调用快。
-  - 百度另支持api方式，但需要通过百度翻译平台(https://api.fanyi.baidu.com)创建相应的应用，获取app_id、app_key具体参考 <font color = "red">[baidu_translation_by_api.py](baidu_translation_by_api.py)</font>
+  - 百度另支持api方式，但需要通过百度翻译平台(https://api.fanyi.baidu.com) 创建相应的应用，获取app_id、app_key具体参考 <font color = "red">[baidu_translation_by_api.py](baidu_translation_by_api.py)</font>
 - 数据格式：参考[data\sample_data.json](data\sample_data.json )  
 - 功能：
   - 目前脚本都是按中英文相互翻译 中文——>英文；英文——>中文逻辑自行。有需要其他语言翻译、或有其他逻辑可自行修改
