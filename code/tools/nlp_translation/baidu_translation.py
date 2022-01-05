@@ -146,9 +146,9 @@ def execute(is_windows,is_en,file_path,trans_time):
 	@param trans_time 单个文本翻译时长，根据翻译文本长度自行调整
 	"""
 	if is_windows:
-		driver_path = "plugin/chromedriver.exe"
+		driver_path = "../../plugin/chromedriver.exe"
 	else:
-		driver_path = "plugin/chromedriver"
+		driver_path = "../../plugin/chromedriver"
 	driver = init(driver_path)
 	try:
 		tranlate(driver,file_path,is_windows,is_en,trans_time)
@@ -162,6 +162,6 @@ def execute(is_windows,is_en,file_path,trans_time):
 
 if __name__ == '__main__':
 	#先将所有问题都翻译成英文
-	execute(False,True,"data/sample_data.json",3)
+	execute(False,True,"../../data/trans_sample_data.json",3)
 	#再将英文翻译回正文
-	execute(False, False, "data/sample_data.json", 3)
+	execute(False, False, "../../data/trans_sample_data.json", 3)

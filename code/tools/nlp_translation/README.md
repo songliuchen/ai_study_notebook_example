@@ -22,7 +22,7 @@
   pip install selenium==4.1.0
   pip install pyperclip==1.8.2
   ```
-- 效果
+- 效果  
   ![deepl自动化翻译](../../../resources/images/translation.gif)  
 
 

@@ -123,6 +123,6 @@ def execute(is_en,file_path):
 
 if __name__ == '__main__':
     # 先将所有问题都翻译成英文
-    execute(True, "data/sample_data.json")
+    execute(True, "../../data/trans_sample_data.json")
     # 再将英文翻译回正文
-    execute(False, "data/sample_data.json")
+    execute(False, "../../data/trans_sample_data.json")
