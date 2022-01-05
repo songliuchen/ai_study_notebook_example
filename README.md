@@ -6,7 +6,7 @@
 #### 人工智能学习相关示例代码整理，包括tensorflow1.x、tensorflow2.x、pytorch实现
 - 通过python3.x版本实现
 - 只涉及机器学习、深度学习相关代码，非python入门示例代码
-- 常用小工具，例如爬虫，[自动化中英文翻译工具](code/tools/README.md)（google、baidu、deepl、有道、彩云等）
+- 常用小工具，例如爬虫，[自动化中英文翻译工具](code/tools/nlp_translation/README.md)（google、baidu、deepl、有道、彩云等）
 - 搭建简单人工智能训练平台
 #### 业务模块的技术方案梳理
 - 整理图像、文本、语音具体任务及实现方案
