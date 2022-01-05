@@ -5,7 +5,7 @@
 notices:
 1、tensorflow2中删除了占位符的概念，使用占位符的话，需要通过tf.compat.v1.placeholder切换到1.0版本
 2、此处的除法，是同元素逐个相除，非真正的矩阵除法
-3、tensorflow2 加减乘除支持 直接用数学符号运算，例如 + - * /
+3、tensorflow 加减乘除支持 直接用数学符号运算，例如 + - * /
 '''
 
 # 引入tensorflow，一般给个简称

@@ -4,6 +4,7 @@
 3、tensorflow multiply 与matmul 区别
 notices:
 1、此处的除法，是同元素逐个相除，非真正的矩阵除法
+2、tensorflow 加减乘除支持 直接用数学符号运算，例如 + - * /
 '''
 
 # 引入tensorflow，一般给个简称
@@ -100,7 +101,9 @@ add = tf.add(con1,con2)
 #int运算
 con_int_1 = tf.constant(2)
 con_int_2 = tf.constant(4)
-add_int = tf.add(con_int_1,con_int_2)
+add_int = con_int_1+ con_int_2
+#直接通过运算符获取结果
+add_int2 = tf.add(con_int_1,con_int_2)
 sub_int = tf.subtract(con_int_1,con_int_2)
 mul_int = tf.multiply(con_int_1,con_int_2)
 div_int = tf.divide(con_int_1,con_int_2)
@@ -160,6 +163,8 @@ with tf.Session() as sess:
     # int 数学运算
     result = sess.run(add_int)
     print("int加法结果：%d" %result)
+    result = sess.run(add_int2)
+    print("int加法结果2：%d" % result)
     result = sess.run(sub_int)
     print("int减法结果：%d" % result)
     result = sess.run(mul_int)
@@ -217,7 +222,7 @@ with tf.Session() as sess:
 #############################################################################################################
 
 # tf.multiply()与tf.matmul()区别
-# multiply()两个矩阵中对应元素各自相乘，matmul()将矩阵a乘以矩阵b，生成a * b,必须满足矩阵相乘的条件。
+# *,multiply()两个矩阵中对应元素各自相乘，matmul()将矩阵a乘以矩阵b，生成a * b,必须满足矩阵相乘的条件。
 # multiply 支持单数*矩阵，其他要求两个矩阵是同型矩阵
 con_arr_int1 = tf.constant([[1,1],[2,2]])
 con_arr_int2 = tf.constant([[3,3],[4,4]])
