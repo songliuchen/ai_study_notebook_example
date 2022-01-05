@@ -2,6 +2,8 @@
 1、tensorflow 常量、变量、占位符使用
 2、tensorflow 加、减、乘、除、转置数学运算
 3、tensorflow multiply 与matmul 区别
+notices:
+1、此处的除法，是同元素逐个相除，非真正的矩阵除法
 '''
 
 # 引入tensorflow，一般给个简称

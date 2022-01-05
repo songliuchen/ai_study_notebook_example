@@ -1,7 +1,9 @@
 '''
 1、pytorch 常量、变量使用
 2、pytorch 加、减、乘、除、转置数学运算
-3、pytorch multiply 与 matmul 区别
+3、pytorch * @ mul,mm,matmul 区别
+notices:
+1、此处的除法，是同元素逐个相除，非真正的矩阵除法
 '''
 
 # 引入torch
@@ -19,99 +21,114 @@ print("int型数字%d" % num_int)
 print("float型数字%.2f" % num_float)
 
 # 打印变量
-tensor = torch.tensor(0.2,dtype=torch.float32)
+tensor = torch.tensor(0,dtype=torch.int)
 var1 = Variable(tensor)
-print("打印变量结果 %.2f" % var1)
+print("打印变量结果 %d" % var1)
 for i in range(5):
     #给变量赋值
-    var1 = var1.assign(i+1)
-    print("更新变量值%s" % var1.numpy())
-#
-# print("算数运算：")
-# #字符串运算
-# con1 = tf.constant("hello")
-# con2 = tf.constant("world")
-# add = tf.add(con1,con2)
-# print("str加法结果：%s" % add.numpy().decode())
-#
-# # #int运算
-# con_int_1 = tf.constant(2)
-# con_int_2 = tf.constant(4)
-# add_int = tf.add(con_int_1,con_int_2)
-# sub_int = tf.subtract(con_int_1,con_int_2)
-# mul_int = tf.multiply(con_int_1,con_int_2)
-# div_int = tf.divide(con_int_1,con_int_2)
-# # 打印int运算结果
-# print("int加法结果：%d" % add_int.numpy())
-# print("int减法结果：%d" % sub_int.numpy())
-# print("int乘法结果：%d" % mul_int.numpy())
-# print("int除法结果：%d" % div_int.numpy())
-#
-# #float运算
-# con_float_1 = tf.constant(2.2)
-# con_float_2 = tf.constant(4.4)
-# add_float = tf.add(con_float_1,con_float_2)
-# sub_float = tf.subtract(con_float_1,con_float_2)
-# mul_float = tf.multiply(con_float_1,con_float_2)
-# div_float = tf.divide(con_float_1,con_float_2)
-# # 打印float运算结果
-# print("float加法结果：%f" % add_float.numpy())
-# print("float减法结果：%f" % sub_float.numpy())
-# print("float乘法结果：%f" % mul_float.numpy())
-# print("float除法结果：%f" % div_float.numpy())
-#
+    tensor += 1
+    print("更新变量值%d" % var1)
+
+print("算数运算：")
+# #int运算
+con_int_1 = torch.tensor(2)
+con_int_2 = torch.tensor(4)
+add_int = con_int_1+con_int_2
+sub_int = con_int_1 - con_int_2
+mul_int = con_int_1*con_int_2
+div_int = con_int_1/con_int_2
+# 打印int运算结果
+print("int加法结果：%d" % add_int)
+print("int减法结果：%d" % sub_int)
+print("int乘法结果：%d" % mul_int)
+print("int除法结果：%d" % div_int)
+
+#float运算
+con_float_1 = torch.tensor(2.2)
+con_float_2 = torch.tensor(4.4)
+add_float = con_float_1+con_float_2
+sub_float = con_float_1 - con_float_2
+mul_float = con_float_1 * con_float_2
+div_float = con_float_1 / con_float_2
+# 打印float运算结果
+print("float加法结果：%.2f" % add_float)
+print("float减法结果：%.2f" % sub_float)
+print("float乘法结果：%.2f" % mul_float)
+print("float除法结果：%.2f" % div_float)
+
 # #矩阵运算
-# con_arr_int1 = tf.constant([[1,1],[2,2]])
-# con_arr_int2 = tf.constant([[3,3],[4,4]])
-# con_int3 = tf.constant(2)
-# con_arr_int3 = tf.constant([[3,3],[4,4],[5,5]])
-# con_arr_int4 = tf.constant([[3,3,3],[4,4,4]])
-# add_arr = tf.add(con_arr_int1,con_arr_int2)
-# sub_arr = tf.subtract(con_arr_int1,con_arr_int2)
-# mul_arr = tf.matmul(con_arr_int1,con_arr_int2)
-# div_arr = tf.divide(con_arr_int1,con_arr_int2)
-# # 打印矩阵运算结果
-# print("arr加法结果：\n%s" % add_arr.numpy())
-# print("arr减法结果：\n%s" % sub_arr.numpy())
-# print("arr乘法结果：\n%s" % mul_arr.numpy)
-# print("arr除法结果：\n%s" % div_arr.numpy)
-#
-# # 单数*矩阵、矩阵/单数
-# con_mul_arr = tf.multiply(con_int3,con_arr_int1)
-# con_div_arr = tf.divide(con_arr_int2,con_int3)
-# print("int*arr结果：\n%s" % con_mul_arr.numpy())
-# print("arr/int结果：\n%s" % con_div_arr.numpy())
-#
-# #不同维度m*n矩阵  * n*k的矩阵,第一个矩阵的列数必须等于第二个矩阵的行数
-# arr_mul_arr = tf.matmul(con_arr_int3,con_arr_int4)
-# print("arr*arr结果：\n%s" % arr_mul_arr.numpy())
-#
+con_arr_int1 = torch.tensor([[1,1],[2,2]])
+con_arr_int2 = torch.tensor([[3,3],[4,4]])
+con_int3 = torch.tensor(2)
+con_arr_int3 = torch.tensor([[3,3],[4,4],[5,5]])
+con_arr_int4 = torch.tensor([[3,3,3],[4,4,4]])
+add_arr = con_arr_int1 + con_arr_int2
+sub_arr = con_arr_int1 - con_arr_int2
+#矩阵乘法不能用* ，要用@符号
+mul_arr = con_arr_int1 @ con_arr_int2
+div_arr = con_arr_int1 / con_arr_int2
+div_arr2 = torch.div(con_arr_int1, con_arr_int2)
+div_arr3 = torch.divide(con_arr_int1, con_arr_int2)
+# 打印矩阵运算结果
+print("arr加法结果：\n%s" % add_arr)
+print("arr减法结果：\n%s" % sub_arr)
+print("arr乘法结果：\n%s" % mul_arr)
+
+print("arr除法结果：\n%s" % div_arr)
+print("arr除法结果2：\n%s" % div_arr2)
+print("arr除法结果3：\n%s" % div_arr3)
+
+# 单数*矩阵、矩阵/单数
+con_mul_arr = con_int3 * con_arr_int1
+con_div_arr = con_arr_int2 /con_int3
+print("int*arr结果：\n%s" % con_mul_arr)
+print("arr/int结果：\n%s" % con_div_arr)
+
+# 不同维度m*n矩阵  *  n*k的矩阵,第一个矩阵的列数必须等于第二个矩阵的行数
+# pytorch 不同维度矩阵不能直接用 * 相乘
+# pytorch 支持mm、matmul两种举证相乘方法，正常使用torch.mm即可
+arr_mul_arr = torch.mm(con_arr_int3,con_arr_int4)
+arr_mul_arr2 = torch.matmul(con_arr_int3,con_arr_int4)
+print("arr*arr结果1：\n%s" % arr_mul_arr)
+print("arr*arr结果2：\n%s" % arr_mul_arr2)
+
 # #矩阵转置
-# arr_trans = tf.transpose(con_arr_int1)
-# print("矩阵转置效果前：\n%s" % con_arr_int1.numpy())
-# print("矩阵转置效果后：\n%s" % arr_trans.numpy())
-#
-#
-# #变量与矩阵运算
-# var_arr1 = tf.Variable([[2,2],[3,3]],dtype=tf.int32)
-# col_arr1 = tf.constant([[2,2],[3,3]])
-# arr_mul_var = tf.matmul(var_arr1,col_arr1)
-#
+arr_trans = con_arr_int1.T
+print("矩阵转置效果前：\n%s" % con_arr_int1)
+print("矩阵转置效果后：\n%s" % arr_trans)
+
+
+#变量与矩阵运算
+tensor = torch.tensor([[2,2],[3,3]])
+var_arr1 = Variable(tensor)
+col_arr1 = torch.tensor([[2,2],[3,3]])
+arr_mul_var =var_arr1 *col_arr1
+
 # #变量与变量矩阵运算
-# var_var_arr1 = tf.Variable([[2,2],[3,3]],dtype=tf.int32)
-# var_var_arr2 = tf.constant([[2,2],[3,3]],dtype=tf.int32)
-# var_mul_var = tf.matmul(var_var_arr1,var_var_arr2)
-# print("变量*矩阵结果：\n%s" % arr_mul_var.numpy())
-# print("变量矩阵*变量矩阵：\n%s" % var_mul_var.numpy())
-#
-# # #############################################################################################################
-#
-# # tf.multiply()与tf.matmul()区别
-# # multiply()两个矩阵中对应元素各自相乘，matmul()将矩阵a乘以矩阵b，生成a * b,必须满足矩阵相乘的条件。
-# # multiply 支持单数*矩阵，其他要求两个矩阵是同型矩阵
-# con_arr_int1 = tf.constant([[1,1],[2,2]])
-# con_arr_int2 = tf.constant([[3,3],[4,4]])
-# con_arr_multiply = tf.multiply(con_arr_int1,con_arr_int2)
-# con_arr_matmul = tf.matmul(con_arr_int1,con_arr_int2)
-# print("int*arr multiply结果：\n%s" % con_arr_multiply.numpy())
-# print("int*arr matmul结果：\n%s" % con_arr_matmul.numpy())
+var_var_arr1 = Variable(tensor)
+var_var_arr2 = torch.tensor([[2,2],[3,3]])
+var_mul_var = var_var_arr1 * var_var_arr2
+print("变量*矩阵结果：\n%s" % arr_mul_var)
+print("变量矩阵*变量矩阵：\n%s" % var_mul_var)
+
+
+# #############################################################################################################
+# pytorch 矩阵相乘 与 矩阵逐个元素相乘
+# *，torch.mul两个矩阵中对应元素各自相乘,支持单数*矩阵，其他要求矩阵必须是同型矩阵
+# @,mm,matmul将矩阵a乘以矩阵b，生成a * b,必须满足矩阵相乘的条件。其中mm只能计算二维矩阵相乘
+con_arr_int1 = torch.tensor([[1,1],[2,2]])
+con_arr_int2 = torch.tensor([[3,3],[4,4]])
+arr_arr_int_ = con_arr_int1 @ con_arr_int2
+arr_arr_int = con_arr_int1*con_arr_int2
+
+con_arr_mul = torch.mul(con_arr_int1,con_arr_int2)
+con_arr_matmul = torch.matmul(con_arr_int1,con_arr_int2)
+con_arr_mm = torch.mm(con_arr_int1,con_arr_int2)
+print("矩阵逐元素相乘：")
+print("arr*arr 结果：\n%s" % arr_arr_int)
+print("arr*arr mul结果：\n%s" % con_arr_mul)
+
+print("矩阵相乘：")
+print("arr*arr @结果：\n%s" % arr_arr_int_)
+print("arr*arr matmul结果：\n%s" % con_arr_matmul)
+print("arr*arr mm结果：\n%s" % con_arr_mm)
