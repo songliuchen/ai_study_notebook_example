@@ -13,6 +13,11 @@ import os
 import logging
 
 def init(driver_path):
+	"""
+	初始化selenium
+	@param driver_path:
+	@return:
+	"""
 	s = Service(driver_path)
 	chrome_options = Options()
 	chrome_options.add_argument('--headless')
@@ -24,6 +29,14 @@ def init(driver_path):
 	return driver
 
 def paste_it(text,driver,is_windows,trans_time = 3):
+	"""
+	具体执行单个文本翻译
+	@param text:待翻译文本
+	@param driver:
+	@param is_windows:是否windows系统
+	@param trans_time:延迟时间
+	@return:
+	"""
 	input_css = '//textarea[@aria-label="原文"]'
 	input_area = driver.find_element(by=By.XPATH, value=input_css)
 	pyperclip.copy(text)
@@ -33,7 +46,7 @@ def paste_it(text,driver,is_windows,trans_time = 3):
 	else:
 		input_area.send_keys(Keys.COMMAND + "v")
 
-	time.sleep(3)
+	time.sleep(trans_time)
 	button_css = '//button[@aria-label="复制译文"]'
 	button = driver.find_element(by=By.XPATH, value=button_css)
 	y = button.location['y']
@@ -49,6 +62,15 @@ def paste_it(text,driver,is_windows,trans_time = 3):
 	return content
 
 def tranlate(driver,file_name,is_windows,is_en=True,trans_time = 3):
+	"""
+	循环解析文件执行翻译
+	@param driver:
+	@param file_name:
+	@param is_windows:
+	@param is_en:
+	@param trans_time:
+	@return:
+	"""
 	# google中-英翻译地址
 	url = 'https://translate.google.cn/?sl=zh-CN&tl=en&text=%0A&op=translate'
 	source_name = ".json"
