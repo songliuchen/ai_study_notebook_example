@@ -1,8 +1,9 @@
 ### AI学习入门资料整理（边学习边整理）
 #### 人工智能学习相关资料整理 
 - 梳理人工智能开发一些常规概念
-- 梳理人工智能开发主流框架
+- [常用人工智能开发主流框架及其优缺点](articles/code_relation/1_ai_framework.md)
 - 人工智能分支路线及分支相关技术
+- [开源人工智能相关工具包](articles/code_relation/3_third_collection.md)
 #### 人工智能学习相关示例代码整理，包括tensorflow1.x、tensorflow2.x、pytorch实现
 - 通过python3.x版本实现
 - 只涉及机器学习、深度学习相关代码，非python入门示例代码

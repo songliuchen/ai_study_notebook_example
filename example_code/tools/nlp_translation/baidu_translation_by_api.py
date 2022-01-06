@@ -10,6 +10,14 @@ import os
 import logging
 
 def paste_it(text,is_en):
+    """
+    具体执行单个文本翻译
+    @param text:待翻译文本
+    @param driver:
+    @param is_windows:是否windows系统
+    @param trans_time:延迟时间
+    @return:
+    """
     try:
         # 通过https://api.fanyi.baidu.com/创建对应的应用即可获取
         appid = '你的app_id'
@@ -47,6 +55,15 @@ def paste_it(text,is_en):
         return ""
 
 def tranlate(file_name,is_en=True):
+    """
+    循环解析文件执行翻译
+    @param driver:
+    @param file_name:
+    @param is_windows:
+    @param is_en:
+    @param trans_time:
+    @return:
+    """
     # 翻译地址(自动检测语言）
     source_name = ".json"
     target_name = "_baidu_en.json"
