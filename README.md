@@ -12,9 +12,9 @@
      - [tensorflow2.x实现](example_code/tensorflow_v2/1_base/1_hello_world.py)
      - [pytorch实现](example_code/tensorflow_v2/1_base/1_hello_world.py)
    - 简单线性回归模型实现
-     - [tensorflow1.x实现](example_code/tensorflow_v1/1_base/2_simple_linear_regression.py)
-     - [tensorflow2.x实现](example_code/tensorflow_v2/1_base/2_simple_linear_regression.py)
-     - [pytorch实现](example_code/tensorflow_v2/1_base/2_simple_linear_regression.py)
+     - [tensorflow1.x实现](example_code/tensorflow_v1/2_base_models/1_simple_linear_regression.py)
+     - [tensorflow2.x实现](example_code/tensorflow_v2/2_base_models/1_simple_linear_regression.py)
+     - [pytorch实现](example_code/tensorflow_v2/2_base_models/1_simple_linear_regression.py)
 - 常用小工具，例如爬虫，[自动化中英文翻译工具](example_code/tools/nlp_translation/README.md)（google、baidu、deepl、有道、彩云等）
   - 自动化机器翻译：中文——>英文；英文——>中文，实时保存 
      - [deepl平台自动化翻译（selenium+chromedriver）](example_code/tools/nlp_translation/deepl_translation.py)
