@@ -7,19 +7,23 @@
 # @File    : gen_linear_data.py.py
 
 import torch
-from file_utils import read_file
 def gen_linear():
     """
     生成简单线性回归样本数据
     @return:
     """
-    x =  torch.rand(1000)
-    y = 2.8366*x+0.1245
+    x = torch.rand(1000)
+    y = 2.8366*x+7.1245
     arr_x = x.data
     arr_y = y.data
 
-    with open("../../data/simple_linear_data_dev.txt", mode="a+", encoding='utf-8') as f:
+    with open("../../data/simple_linear_data_test.txt", mode="w", encoding='utf-8') as f:
         for i in range(len(arr_x)):
+            rand_data = torch.rand(1)
+            rand_data = torch.pow(rand_data,3)
+            if i %2 == 0:
+                rand_data = -rand_data
+            arr_y[i] = arr_y[i]+rand_data
             f.write("%f,%f\n" % (arr_x[i],arr_y[i]))
         f.flush()
 

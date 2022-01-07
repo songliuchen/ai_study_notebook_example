@@ -26,3 +26,16 @@
 - 搭建简单人工智能训练平台
 #### 业务模块的技术方案梳理
 - 整理图像、文本、语音具体任务及实现方案
+
+#### 安装
+```
+#pytorch 版本安装
+pip install -r  example_code/pytorch/requirements.txt
+
+#tensorflow_v1 版本安装
+pip install -r  example_code/tensorflow_v1/requirements.txt
+
+#tensorflow_v2 版本安装
+pip install -r  example_code/tensorflow_v2/requirements.txt
+
+```

@@ -1,0 +1,5 @@
+tensorflow==2.7.0
+tensorboard==2.7.0
+selenium==4.1.0
+pyperclip==1.8.2
+matlab==0.1
