@@ -4,7 +4,7 @@
 # @Author  : song
 # @Email   : song_gis@163.com  
 # @gitee    : gitee.com/songliuchen
-# @File    : matlab_utils.py.py
+# @File    : matlab_utils.py
 import matplotlib.pyplot as plt
 def draw_line(data:list,config:dict):
     """

@@ -4,7 +4,7 @@
 # @Author  : song
 # @Email   : song_gis@163.com  
 # @gitee    : gitee.com/songliuchen
-# @File    : gen_linear_data.py.py
+# @File    : gen_linear_data.py
 
 import torch
 def gen_linear():
