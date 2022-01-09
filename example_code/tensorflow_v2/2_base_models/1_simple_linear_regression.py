@@ -63,10 +63,28 @@
 # #根据预热比例计算预热步数
 # wrap_step = int(global_steps*wrap_rate)
 #
-# # 损失函数：(实际值 - 预测值)求平方 再取均值
-# optimizer = tf.keras.optimizers.SGD(learning_rate=0.1)
 # # 当前步数
 # current_step = 0
+#
+# # 损失函数：(实际值 - 预测值)求平方 再取均值
+# optimizer = tf.keras.optimizers.SGD(learning_rate=0.1)  # 优化器
+#
+# def create_model():
+#     model = tf.keras.Sequential()
+#     model.add(tf.keras.layers.Dense(1,input_shape=(1,),input_dim=1))
+#     return model
+#
+# def loss(model, x, y):
+#     y1 = model(x)
+#     return tf.reduce_mean(tf.square(y - y1))
+#
+# train_model = create_model()
+# def get_gred(w,x,y,b,variables):
+#     with tf.GradientTape() as tape:
+#         y1 = train_model(x)
+#         loss = loss(train_model,)
+#     grad = tape.gradient(loss, variables)
+#     return grad,y1,loss
 #
 # for epouch in range(epouchs):
 #     current_index = 0
@@ -80,10 +98,8 @@
 #
 #         x.assign(train_data_arr_x[current_index:batch_end])
 #         y.assign(train_data_arr_y[current_index:batch_end])
-#         with tf.GradientTape() as tape:
-#             y1 = w * x + b
-#             loss = tf.reduce_mean(tf.square(y - y1))
-#         grads = tape.gradient(loss, variables)
+#         #创建梯度优化器对象
+#         grads,y1,loss = get_gred(w,x,y,b,variables)
 #         optimizer.apply_gradients(grads_and_vars=zip(grads, variables))
 #         # 保存loss记录
 #         if current_index % 100 == 0 and current_step>wrap_step:
@@ -98,6 +114,9 @@
 #             y.assign(test_data_arr_y)
 #             loss_test_x.append(len(loss_train_x)-1)
 #
+#             # 创建梯度优化器对象
+#             grads, y1,loss = get_gred(w, x, y, b, variables)
+#
 #             loss_test_y.append(loss)
 #             print("test loss:%s" % loss.numpy())
 #             print("")
@@ -105,13 +124,32 @@
 #         current_index += batch_size
 #         current_step+=1
 #
-# x.assign(test_data_arr_x)
-# y.assign(test_data_arr_y)
-# loss_val_test = loss
-#
 # # 绘制loss折线图
 # draw_line([{"x":loss_train_x,"y":loss_train_y,"name":"train_loss","color":"blue"},{"x":loss_test_x,"y":loss_test_y,"name":"test_loss","color":"red"}],{"x_name":"step","y_name":"loss","title":"loss/step"})
 #
+# # 保存模型
+# model = tf.keras.Sequential()
+# root = tf.train.Checkpoint(optimizer=optimizer, linear_model=model)
+# saved_folder = "../../output/tf2/"
+# if not os.path.exists(saved_folder):
+#     os.mkdir(saved_folder)
+# root.save(saved_folder+"linear_regression.ckpt")
+#
+# # # 加载模型
+# # x.assign(test_data_arr_x)
+# # y.assign(test_data_arr_y)
+# #
+# # # 创建梯度优化器对象
+# # grads, y1,loss = get_gred(w, x, y, b, variables)
+# #
+# # loss_val_test = y1
+#
+# #实例化Checkpoint，指定恢复对象为model
+# new_model = tf.keras.Sequential()
+# checkpoint = tf.train.Checkpoint(linear_model1=new_model)
+# checkpoint.restore(tf.train.latest_checkpoint(saved_folder))
+#
+# test_y = new_model.predict(test_data_arr_x)
 # #绘制离散点效果图
-# draw_data = [{"x":test_data_arr_x,"y":test_data_arr_y,"name":"real_val","type":"point","color":"blue"},{"x":test_data_arr_x,"y":loss_val_test,"name":"pre_val","type":"line","color":"red"}]
+# draw_data = [{"x":test_data_arr_x,"y":test_data_arr_y,"name":"real_val","type":"point","color":"blue"},{"x":test_data_arr_x,"y":test_y,"name":"pre_val","type":"line","color":"red"}]
 # draw(draw_data,{"x_name":"x","y_name":"y","title":"linear_regression"})

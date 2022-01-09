@@ -1,0 +1,2 @@
+- [动手学深度学习：https://trickygo.github.io/Dive-into-DL-TensorFlow2.0/#/chapter01_DL-intro/deep-learning-intro?id=%e7%bb%83%e4%b9%a0](https://trickygo.github.io/Dive-into-DL-TensorFlow2.0/#/chapter01_DL-intro/deep-learning-intro?id=%e7%bb%83%e4%b9%a0)
+- [线性回归](https://codeantenna.com/a/cidNbrhvht)

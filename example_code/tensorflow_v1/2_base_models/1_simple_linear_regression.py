@@ -41,25 +41,25 @@ for item in test_data:
 
 #定义线性函数需要的变量 y = wx+b
 with tf.name_scope('input'):
-    x = tf.compat.v1.placeholder(dtype=tf.compat.v1.float32,name="x")
-    y = tf.compat.v1.placeholder(dtype=tf.compat.v1.float32,name="y")
+    x = tf.placeholder(dtype=tf.float32,name="x")
+    y = tf.placeholder(dtype=tf.float32,name="y")
 with tf.name_scope('layer'):
     with tf.name_scope('wights'):
-        w = tf.compat.v1.Variable(0.)
+        w = tf.Variable(0.)
     with tf.name_scope('biases'):
-        b = tf.compat.v1.Variable(0.)
+        b = tf.Variable(0.)
     # 定义线性函数公式
     with tf.name_scope('wx_plus_b'):
         y1 = w*x+b
 
 # 损失函数：(实际值 - 预测值)求平方 再取均值
 with tf.name_scope('loss'):
-    loss = tf.compat.v1.reduce_mean(tf.square(y-y1))
+    loss = tf.reduce_mean(tf.square(y-y1))
 #梯度下降优化器
 with tf.name_scope('train'):
-    train = tf.compat.v1.train.GradientDescentOptimizer(0.1).minimize(loss)
+    train = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
 
-init = tf.compat.v1.initialize_all_variables()
+init = tf.initialize_all_variables()
 
 # 保存训练集损失值
 loss_train_x = []
@@ -82,10 +82,10 @@ wrap_step = int(global_steps*wrap_rate)
 
 # 当前步数
 current_step = 0
-with tf.compat.v1.Session() as sess:
+with tf.Session() as sess:
     sess.run(init)
     #保存网络图
-    writer = tf.compat.v1.summary.FileWriter('../../output/logs/', sess.graph)
+    writer = tf.summary.FileWriter('../../output/logs/', sess.graph)
     for epouch in range(epouchs):
         current_index = 0
         #每个epouch前重新排序数据
@@ -116,24 +116,28 @@ with tf.compat.v1.Session() as sess:
             current_index += batch_size
             current_step+=1
 
+    #保存网络图
     writer.close()
 
     # 保存模型
-    saver = tf.compat.v1.train.Saver(max_to_keep=1)
-    saver.save(sess, "../../output/linear_regression.ckpt")
+    saved_folder = "../../output/tf1/"
+    if (not os.path.exists(saved_folder)):
+        os.mkdir(saved_folder)
+    saver = tf.train.Saver(max_to_keep=1)
+    saver.save(sess, saved_folder+"linear_regression.ckpt")
 
 # 绘制训练集和测试集loss折线图
 draw_line([{"x":loss_train_x,"y":loss_train_y,"name":"train_loss","color":"blue"},{"x":loss_test_x,"y":loss_test_y,"name":"test_loss","color":"red"}],{"x_name":"step","y_name":"loss","title":"loss/step"})
 
 # 加载模型，执行预测整个测试集
-with tf.compat.v1.Session() as sess_2:
-    saver.restore(sess_2, tf.compat.v1.train.latest_checkpoint("../../output"))
+with tf.Session() as sess_2:
+    saver.restore(sess_2, tf.train.latest_checkpoint(saved_folder))
 
     # 获取最后测试集上效果
-    loss_val_test = sess_2.run(y1, feed_dict={x: test_data_arr_x, y: test_data_arr_y})
+    test_y = sess_2.run(y1, feed_dict={x: test_data_arr_x, y: test_data_arr_y})
 
 #绘制离散点效果图
-draw_data = [{"x":test_data_arr_x,"y":test_data_arr_y,"name":"real_val","type":"point","color":"blue"},{"x":test_data_arr_x,"y":loss_val_test,"name":"pre_val","type":"line","color":"red"}]
+draw_data = [{"x":test_data_arr_x,"y":test_data_arr_y,"name":"real_val","type":"point","color":"blue"},{"x":test_data_arr_x,"y":test_y,"name":"pre_val","type":"line","color":"red"}]
 draw(draw_data,{"x_name":"x","y_name":"y","title":"linear_regression"})
 
 
